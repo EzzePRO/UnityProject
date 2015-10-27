@@ -64,11 +64,15 @@ public class PlayerMove : MonoBehaviour {
 		float horizontalMove = Input.GetAxis ("Horizontal");
 
 		move.x = horizontalMove;
-		move.y = 0.0F;
+		if (Input.GetKeyDown("space")) {
+			move.y = jumpSpeed;
+		} else {
+			move.y -= gravity;
+		}
 		move.z = verticalMove;
 
 		move = transform.rotation * move;
 
-		cc.SimpleMove (move * moveSpeed);
+		cc.Move (move * moveSpeed * Time.deltaTime);
 	}
 }
